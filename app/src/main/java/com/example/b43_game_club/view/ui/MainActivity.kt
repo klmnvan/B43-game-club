@@ -14,7 +14,9 @@ import com.example.b43_game_club.domain.navigation.Navigation
 import com.example.b43_game_club.domain.repository.PrefManager
 import com.example.b43_game_club.view.ui.theme.B43Theme
 import com.example.b43_game_club.view.ui.theme.ThemeMode
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
