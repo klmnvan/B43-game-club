@@ -24,7 +24,7 @@ val Jost = FontFamily(
     Font(R.font.jost_extra_light, FontWeight.ExtraLight),
     Font(R.font.jost_light, FontWeight.Light),
     Font(R.font.jost_medium, FontWeight.Medium),
-    Font(R.font.jost_medium, FontWeight.Normal),
+    Font(R.font.jost_regular, FontWeight.Normal),
     Font(R.font.jost_semi_bold, FontWeight.SemiBold),
     Font(R.font.jost_thin, FontWeight.Thin)
 )
@@ -37,11 +37,11 @@ val typography = Typography(
     titleScreen = TextStyle(
         fontFamily = Cyberpunk,
         fontWeight = FontWeight.Normal,
-        fontSize = 32.sp),
+        fontSize = 40.sp),
     titleTextField = TextStyle(
         fontFamily = Jost,
         fontWeight = FontWeight.Light,
-        fontSize = 20.sp),
+        fontSize = 16.sp),
     textInTextField = TextStyle(
         fontFamily = Jost,
         fontWeight = FontWeight.Normal,

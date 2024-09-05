@@ -15,14 +15,24 @@ fun TextTitleScreen(text: String){
     Box {
         Text(
             text = text,
-            style = B43Theme.typography.titleScreen,
-            color = B43Theme.colors.onPrimary
-        )
-        Text(
-            text = text,
             modifier = Modifier.offset(0.dp, 4.dp),
             style = B43Theme.typography.titleScreen,
             color = Color(Blue.value)
         )
+        Text(
+            text = text,
+            style = B43Theme.typography.titleScreen,
+            color = B43Theme.colors.onPrimary
+        )
     }
+}
+
+@Composable
+fun TittleTextField(text: String){
+    Text(
+        text = text,
+        modifier = Modifier.offset(0.dp, 4.dp),
+        style = B43Theme.typography.titleTextField,
+        color = B43Theme.colors.onPrimary
+    )
 }

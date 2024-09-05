@@ -23,6 +23,15 @@ val gradientBack = Brush.linearGradient(
     end = Offset.Infinite
 )
 
+val gradientButtonPinkBlue = Brush.horizontalGradient(
+    listOf(Color(Pink.value), Color(Blue.value))
+)
+
+val gradientButtonBluePink = Brush.horizontalGradient(
+    listOf(Color(Blue.value), Color(Pink.value))
+)
+
+
 val DarkColorScheme = darkColorScheme(
     background = Back,
     primaryContainer = Containers,
