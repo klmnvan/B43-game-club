@@ -1,4 +1,4 @@
-package com.example.b43_game_club.view.screens.auth
+package com.example.b43_game_club.view.screens.regist
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,28 +7,28 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.NavHostController
 import com.example.b43_game_club.domain.navigation.NavigationRoutes
 import com.example.b43_game_club.domain.network.SupabaseServiceImpl
-import com.example.b43_game_club.model.screens.auth.AuthState
+import com.example.b43_game_club.model.screens.regist.RegistState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class AuthViewModel @Inject constructor(
+class RegistViewModel @Inject constructor(
     private val service: SupabaseServiceImpl
 ) : ViewModel() {
 
-    private val _state = mutableStateOf(AuthState())
-    val state: AuthState get() = _state.value
+    private val _state = mutableStateOf(RegistState())
+    val state: RegistState get() = _state.value
 
-    fun updateState(newState: AuthState) {
+    fun updateState(newState: RegistState) {
         _state.value = newState
     }
 
     @SuppressLint("StaticFieldLeak")
     lateinit var context: Context
 
-    fun goRegist(navHostController: NavHostController) {
-        navHostController.navigate(NavigationRoutes.REGIST) {
-            popUpTo(NavigationRoutes.AUTH){
+    fun goAuth(navHostController: NavHostController) {
+        navHostController.navigate(NavigationRoutes.AUTH) {
+            popUpTo(NavigationRoutes.REGIST){
 
             }
         }

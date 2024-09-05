@@ -2,7 +2,6 @@
 
 package com.example.b43_game_club.view.components
 
-import android.widget.Button
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,9 +13,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.example.b43_game_club.view.ui.theme.B43Theme
 import com.example.b43_game_club.view.ui.theme.White
 import com.example.b43_game_club.view.ui.theme.gradientButtonBluePink
 import com.example.b43_game_club.view.ui.theme.gradientButtonPinkBlue
@@ -40,8 +38,7 @@ fun ButtonPinkBlue(text: String, onClick: () -> Unit, enabled: Boolean = true) {
                 text = text,
                 modifier = Modifier
                     .padding(vertical = 8.dp),
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp,
+                style = B43Theme.typography.button,
                 color = Color.White
             )
         }
@@ -67,8 +64,7 @@ fun ButtonBluePink(text: String, onClick: () -> Unit, enabled: Boolean = true) {
                 text = text,
                 modifier = Modifier
                     .padding(vertical = 8.dp),
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp,
+                style = B43Theme.typography.button,
                 color = Color.White
             )
         }

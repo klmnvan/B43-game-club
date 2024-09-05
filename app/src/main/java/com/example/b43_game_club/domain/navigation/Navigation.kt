@@ -5,6 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.b43_game_club.view.screens.auth.Auth
+import com.example.b43_game_club.view.screens.regist.Regist
 import com.example.b43_game_club.view.screens.splash.Splash
 
 @Composable
@@ -21,7 +22,7 @@ fun Navigation() {
             Auth(controller)
         }
         composable(NavigationRoutes.REGIST){
-
+            Regist(controller)
         }
 
     }
