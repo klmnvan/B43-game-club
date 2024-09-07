@@ -63,7 +63,7 @@ fun Regist(navHostController: NavHostController, viewModel: RegistViewModel = hi
             SpacerHeight(8.dp)
             PasswordTF(state.passwordConfirm, { viewModel.updateState(viewModel.state.copy(passwordConfirm = it))}, "********")
             SpacerHeight(40.dp)
-            ButtonPinkBlue("Далее", {}, true)
+            ButtonPinkBlue("Далее", { viewModel.signIn(navHostController) }, true)
             SpacerHeight(12.dp)
             ButtonBluePink("Авторизация", { viewModel.goAuth(navHostController) }, true)
         }

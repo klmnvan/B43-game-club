@@ -1,11 +1,17 @@
 package com.example.b43_game_club.domain.network
 
+import com.example.b43_game_club.model.screens.Response
+import com.example.b43_game_club.model.screens.supabase.User
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.gotrue.Auth
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.storage.Storage
 
 interface SupabaseService {
+
+    suspend fun signIn(email: String, password: String): Response
+    suspend fun signUp(email: String, password: String): Response
+    suspend fun addUser(users: User): Response
 
     companion object {
         fun create(): SupabaseServiceImpl {

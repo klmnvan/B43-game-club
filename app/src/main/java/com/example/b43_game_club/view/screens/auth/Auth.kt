@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -28,6 +27,7 @@ import com.example.b43_game_club.view.ui.theme.gradientBack
 
 @Composable
 fun Auth(navHostController: NavHostController, viewModel: AuthViewModel = hiltViewModel()) {
+
     val state = viewModel.state
     viewModel.context = LocalContext.current
 
@@ -46,7 +46,7 @@ fun Auth(navHostController: NavHostController, viewModel: AuthViewModel = hiltVi
             SpacerHeight(8.dp)
             PasswordTF(state.password, { viewModel.updateState(viewModel.state.copy(password = it))}, "user@mail.ru")
             SpacerHeight(60.dp)
-            ButtonPinkBlue("Далее", {}, state.password != "" && state.email != "")
+            ButtonPinkBlue("Далее", { viewModel.signIn(navHostController) }, state.password != "" && state.email != "")
             SpacerHeight(8.dp)
             ButtonBluePink("Регистрация", { viewModel.goRegist(navHostController) }, true)
         }
