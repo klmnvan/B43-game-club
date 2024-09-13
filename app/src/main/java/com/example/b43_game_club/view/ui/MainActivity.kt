@@ -8,10 +8,14 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.compose.rememberNavController
 import com.example.b43_game_club.domain.navigation.Navigation
 import com.example.b43_game_club.domain.repository.PrefManager
+import com.example.b43_game_club.view.bottombar.BottomBar
 import com.example.b43_game_club.view.ui.theme.B43Theme
 import com.example.b43_game_club.view.ui.theme.ThemeMode
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,20 +26,22 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             PrefManager.init(LocalContext.current)
+            val isBottomBarVisible = remember { mutableStateOf(false) }
+            val controller = rememberNavController()
             B43Theme(themeMode = ThemeMode.Dark) {
                 Scaffold(
                     modifier = Modifier.fillMaxSize().background(B43Theme.colors.background),
-                    /*bottomBar = {
+                    bottomBar = {
                         if (isBottomBarVisible.value) {
                             BottomBar(
                                 navController = controller,
                             )
                         }
-                    }*/) { paddingValues ->
+                    }) { paddingValues ->
                     Box(
                         modifier = Modifier.padding(paddingValues)
                     ) {
-                        Navigation()
+                        Navigation(controller, isBottomBarVisible)
                     }
                 }
             }

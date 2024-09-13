@@ -29,7 +29,7 @@ fun Splash(navHostController: NavHostController, viewModel: SplashViewModel = hi
 
     viewModel.context = LocalContext.current
     viewModel.launch(navHostController, LocalConfiguration.current)
-    Box(modifier = Modifier.fillMaxSize().background(B43Theme.colors.background).background(gradientBack).padding(horizontal = 80.dp),
+    Box(modifier = Modifier.fillMaxSize().background(B43Theme.colors.primaryContainer).padding(horizontal = 80.dp),
         contentAlignment = Alignment.Center) {
         Image(
             painter = painterResource(R.drawable.logo),
@@ -38,4 +38,5 @@ fun Splash(navHostController: NavHostController, viewModel: SplashViewModel = hi
             contentScale = ContentScale.FillWidth
         )
     }
+
 }

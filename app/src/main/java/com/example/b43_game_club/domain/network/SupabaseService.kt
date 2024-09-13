@@ -1,6 +1,8 @@
 package com.example.b43_game_club.domain.network
 
 import com.example.b43_game_club.model.screens.Response
+import com.example.b43_game_club.model.screens.supabase.GetGamePackagesResponse
+import com.example.b43_game_club.model.screens.supabase.GetTypePackageResponse
 import com.example.b43_game_club.model.screens.supabase.User
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.gotrue.Auth
@@ -12,6 +14,8 @@ interface SupabaseService {
     suspend fun signIn(email: String, password: String): Response
     suspend fun signUp(email: String, password: String): Response
     suspend fun addUser(users: User): Response
+    suspend fun getTypePackages(): GetTypePackageResponse
+    suspend fun getGamePackages(): GetGamePackagesResponse
 
     companion object {
         fun create(): SupabaseServiceImpl {

@@ -2,6 +2,10 @@ package com.example.b43_game_club.domain.network
 
 import android.util.Log
 import com.example.b43_game_club.model.screens.Response
+import com.example.b43_game_club.model.screens.supabase.GamePackage
+import com.example.b43_game_club.model.screens.supabase.GetGamePackagesResponse
+import com.example.b43_game_club.model.screens.supabase.GetTypePackageResponse
+import com.example.b43_game_club.model.screens.supabase.TypePackage
 import com.example.b43_game_club.model.screens.supabase.User
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.gotrue.auth
@@ -50,6 +54,26 @@ class SupabaseServiceImpl(private val client: SupabaseClient): SupabaseService {
         } else {
             Log.d("error add user", "Пользователь не авторизован")
             Response("", "Пользователь не авторизован")
+        }
+    }
+
+    override suspend fun getTypePackages(): GetTypePackageResponse {
+        return try {
+            val response = client.from("type_package").select().decodeList<TypePackage>()
+            GetTypePackageResponse(response.toMutableList())
+        } catch (e: Exception) {
+            Log.d("error getTypePackages", e.message.toString())
+            GetTypePackageResponse(mutableListOf(), e.message.toString())
+        }
+    }
+
+    override suspend fun getGamePackages(): GetGamePackagesResponse {
+        return try {
+            val response = client.from("game_packages").select().decodeList<GamePackage>()
+            GetGamePackagesResponse(response.toMutableList())
+        } catch (e: Exception) {
+            Log.d("error getGamePackages", e.message.toString())
+            GetGamePackagesResponse(mutableListOf(), e.message.toString())
         }
     }
 

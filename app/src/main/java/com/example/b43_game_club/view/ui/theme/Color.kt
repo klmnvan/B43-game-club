@@ -1,5 +1,6 @@
 package com.example.b43_game_club.view.ui.theme
 
+import androidx.compose.animation.core.VisibilityThreshold
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.geometry.Offset
@@ -17,8 +18,8 @@ val White50 = Color(0x80FFFFFF)
 val Error = Color(0xFFEA001C)
 
 val gradientBack = Brush.linearGradient(
-    0.0f to Back,
-    500.0f to Blue20,
+    0.0f to Containers,
+    1.0f to Blue20,
     start = Offset.Zero,
     end = Offset.Infinite
 )
@@ -27,10 +28,13 @@ val gradientButtonPinkBlue = Brush.horizontalGradient(
     listOf(Color(Pink.value), Color(Blue.value))
 )
 
+val gradientButtonPinkBlue40 = Brush.horizontalGradient(
+    listOf(Color(Pink.copy(alpha = 0.4f).value), Color(Blue.copy(alpha = 0.4f).value))
+)
+
 val gradientButtonBluePink = Brush.horizontalGradient(
     listOf(Color(Blue.value), Color(Pink.value))
 )
-
 
 val DarkColorScheme = darkColorScheme(
     background = Back,

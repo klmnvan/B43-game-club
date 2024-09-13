@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
 import com.example.b43_game_club.domain.navigation.NavigationRoutes
 import com.example.b43_game_club.domain.network.SupabaseServiceImpl
+import com.example.b43_game_club.domain.repository.PrefManager
 import com.example.b43_game_club.model.screens.auth.AuthState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -32,7 +33,7 @@ class AuthViewModel @Inject constructor(
     fun goRegist(navHostController: NavHostController) {
         navHostController.navigate(NavigationRoutes.REGIST) {
             popUpTo(NavigationRoutes.AUTH){
-
+                inclusive = true
             }
         }
     }
@@ -42,6 +43,7 @@ class AuthViewModel @Inject constructor(
             viewModelScope.launch {
                 val response = service.signIn(state.email, state.password)
                 if(response.error == "") {
+                    PrefManager.act = 1
                     navHostController.navigate(NavigationRoutes.HOME) {
                         popUpTo(NavigationRoutes.AUTH) {
                             inclusive = true

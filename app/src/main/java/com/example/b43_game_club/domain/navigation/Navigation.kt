@@ -1,17 +1,17 @@
 package com.example.b43_game_club.domain.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.example.b43_game_club.view.screens.auth.Auth
 import com.example.b43_game_club.view.screens.home.Home
 import com.example.b43_game_club.view.screens.regist.Regist
 import com.example.b43_game_club.view.screens.splash.Splash
 
 @Composable
-fun Navigation() {
-    val controller = rememberNavController()
+fun Navigation(controller: NavHostController, visibleBBar: MutableState<Boolean>) {
     NavHost(
         navController = controller,
         startDestination = NavigationRoutes.SPLASH) {
@@ -27,6 +27,12 @@ fun Navigation() {
         }
         composable(NavigationRoutes.HOME){
             Home(controller)
+        }
+        composable(NavigationRoutes.PROFILE){
+            //Profile(controller)
+        }
+        composable(NavigationRoutes.CREATEORDER){
+            //CreateOrder(controller)
         }
 
     }

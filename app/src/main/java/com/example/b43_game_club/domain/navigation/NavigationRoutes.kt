@@ -5,4 +5,6 @@ object NavigationRoutes {
     val AUTH = "auth"
     val REGIST = "regist"
     val HOME = "home"
+    val CREATEORDER = "create_order"
+    val PROFILE = "profile"
 }

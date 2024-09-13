@@ -30,13 +30,13 @@ class SplashViewModel @Inject constructor() : ViewModel() {
                         }
                     }
                 }
-                /* if (PrefManager.act == 1){
-                     navController.navigate(NavigationRoutes.SPLASH) {
-                         popUpTo(NavigationRoutes.AUTH) {
-                             inclusive = true
-                         }
-                     }
-                 }*/
+                if (PrefManager.act == 1){
+                    navController.navigate(NavigationRoutes.HOME) {
+                        popUpTo(NavigationRoutes.SPLASH) {
+                            inclusive = true
+                        }
+                    }
+                }
             }
         }
     }
