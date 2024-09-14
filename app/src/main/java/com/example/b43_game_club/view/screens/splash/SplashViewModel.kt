@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
 import com.example.b43_game_club.domain.navigation.NavigationRoutes
+import com.example.b43_game_club.domain.network.SupabaseServiceImpl
 import com.example.b43_game_club.domain.repository.PrefManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -14,7 +15,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SplashViewModel @Inject constructor() : ViewModel() {
+class SplashViewModel @Inject constructor(
+    private val service: SupabaseServiceImpl
+) : ViewModel() {
 
     @SuppressLint("StaticFieldLeak")
     lateinit var context: Context
@@ -23,7 +26,7 @@ class SplashViewModel @Inject constructor() : ViewModel() {
         viewModelScope.launch {
             if (configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                 delay(1500L)
-                if (PrefManager.act == 0){
+                /*if (PrefManager.act == 0){
                     navController.navigate(NavigationRoutes.AUTH) {
                         popUpTo(NavigationRoutes.SPLASH) {
                             inclusive = true
@@ -31,6 +34,19 @@ class SplashViewModel @Inject constructor() : ViewModel() {
                     }
                 }
                 if (PrefManager.act == 1){
+                    navController.navigate(NavigationRoutes.HOME) {
+                        popUpTo(NavigationRoutes.SPLASH) {
+                            inclusive = true
+                        }
+                    }
+                }*/
+                if(service.userIsAuth()){
+                    navController.navigate(NavigationRoutes.HOME) {
+                        popUpTo(NavigationRoutes.SPLASH) {
+                            inclusive = true
+                        }
+                    }
+                } else {
                     navController.navigate(NavigationRoutes.HOME) {
                         popUpTo(NavigationRoutes.SPLASH) {
                             inclusive = true

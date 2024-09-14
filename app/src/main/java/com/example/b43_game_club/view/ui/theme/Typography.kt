@@ -14,7 +14,8 @@ data class Typography(
     val titleScreen: TextStyle,
     val titleTextField: TextStyle,
     val textInTextField: TextStyle,
-    val button: TextStyle
+    val button: TextStyle,
+    val jostRegular20: TextStyle,
 )
 
 val Jost = FontFamily(
@@ -49,7 +50,11 @@ val typography = Typography(
     button = TextStyle(
         fontWeight = FontWeight.Bold,
         fontFamily = Jost,
-        fontSize = 20.sp)
+        fontSize = 20.sp),
+    jostRegular20 = TextStyle(
+        fontWeight = FontWeight.Normal,
+        fontFamily = Jost,
+        fontSize = 20.sp),
 )
 
 val LocalTypography = staticCompositionLocalOf { typography }

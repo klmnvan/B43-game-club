@@ -10,5 +10,6 @@ data class User(
     var surname: String = "",
     var patronymic: String = "",
     @SerialName("id_role")
-    var idRole: Int = 1
+    var idRole: Int = 1,
+    var image: String = ""
 )

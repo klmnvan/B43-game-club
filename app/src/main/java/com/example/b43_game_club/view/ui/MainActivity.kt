@@ -28,6 +28,7 @@ class MainActivity : ComponentActivity() {
             PrefManager.init(LocalContext.current)
             val isBottomBarVisible = remember { mutableStateOf(false) }
             val controller = rememberNavController()
+
             B43Theme(themeMode = ThemeMode.Dark) {
                 Scaffold(
                     modifier = Modifier.fillMaxSize().background(B43Theme.colors.background),

@@ -1,6 +1,7 @@
 package com.example.b43_game_club.domain.network
 
 import android.util.Log
+import com.example.b43_game_club.domain.repository.PrefManager
 import com.example.b43_game_club.model.screens.Response
 import com.example.b43_game_club.model.screens.supabase.GamePackage
 import com.example.b43_game_club.model.screens.supabase.GetGamePackagesResponse
@@ -75,6 +76,14 @@ class SupabaseServiceImpl(private val client: SupabaseClient): SupabaseService {
             Log.d("error getGamePackages", e.message.toString())
             GetGamePackagesResponse(mutableListOf(), e.message.toString())
         }
+    }
+
+    fun userIsAuth(): Boolean {
+        val user = client.auth.currentUserOrNull()?.id
+        return if(user != null) {
+            PrefManager.act = 1
+            true
+        } else false
     }
 
 }

@@ -10,7 +10,7 @@ sealed class DestinationsBB(
 
     object HomeScreen : DestinationsBB(
         route = "home",
-        title = "Мероприятия",
+        title = "Главная",
         resourceId = R.drawable.icon_fire
     )
 
