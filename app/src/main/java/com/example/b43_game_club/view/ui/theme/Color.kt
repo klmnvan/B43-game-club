@@ -44,7 +44,8 @@ val DarkColorScheme = darkColorScheme(
     primary = Blue,
     error = Error,
     surface = White,
-    onTertiary = White50
+    onTertiary = White50,
+    secondary = Pink
 )
 
 val LocalColors = staticCompositionLocalOf { DarkColorScheme }

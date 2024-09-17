@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,7 +29,12 @@ import com.example.b43_game_club.view.ui.theme.gradientBack
 fun Splash(navHostController: NavHostController, viewModel: SplashViewModel = hiltViewModel()){
 
     viewModel.context = LocalContext.current
-    viewModel.launch(navHostController, LocalConfiguration.current)
+    val configuration = LocalConfiguration.current
+
+    LaunchedEffect(Unit) {
+        viewModel.launch(navHostController, configuration)
+    }
+
     Box(modifier = Modifier.fillMaxSize().background(B43Theme.colors.primaryContainer).padding(horizontal = 80.dp),
         contentAlignment = Alignment.Center) {
         Image(

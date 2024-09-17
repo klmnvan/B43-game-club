@@ -6,12 +6,12 @@ import kotlinx.serialization.Serializer
 
 @Serializable
 data class ProfileState(
+    var id: String = "",
     var name: String = "",
     var surname: String = "",
     var patronymic: String = "",
     @SerialName("id_role")
-    var role: Int = 1,
-    var image: String = "",
+    var role: String = "",
     var email: String = "user@mail.ru",
     var amountRansom: Float = 0f,
     var hours: Float = 0f,

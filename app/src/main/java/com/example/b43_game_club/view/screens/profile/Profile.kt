@@ -16,12 +16,16 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.b43_game_club.view.components.BlueTextView
+import com.example.b43_game_club.view.components.ButtonPink
 import com.example.b43_game_club.view.components.GradientTextView
 import com.example.b43_game_club.view.components.SpacerHeight
 import com.example.b43_game_club.view.components.StandartTF
@@ -35,54 +39,63 @@ import com.example.b43_game_club.view.ui.theme.gradientBack
 @Composable
 fun Profile(navHostController: NavHostController, viewModel: ProfileViewModel = hiltViewModel()){
 
-    val state = viewModel.state
+    val state = viewModel.state.collectAsState()
     viewModel.context = LocalContext.current
 
+    LaunchedEffect(Unit) {
+        viewModel.getProfile()
+    }
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(B43Theme.colors.background)
-            .background(
-                gradientBack
-            )
-            .verticalScroll(rememberScrollState())) {
+        modifier = Modifier.fillMaxSize().background(B43Theme.colors.background)
+            .background(gradientBack).verticalScroll(rememberScrollState())) {
         Column(modifier = Modifier
-            .padding(horizontal = 24.dp)
+            .padding(24.dp)
             .fillMaxWidth()) {
-            SpacerHeight(24.dp)
             Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
                 TextTitleScreen("Профиль")
                 SpacerHeight(20.dp)
-                Box(modifier = Modifier
+                /*Box(modifier = Modifier
                     .background(B43Theme.colors.primaryContainer, RoundedCornerShape(15.dp))
                     .size(100.dp))
+                SpacerHeight(4.dp)
                 Text(
                     text = "Изменить",
                     style = B43Theme.typography.jostRegular20,
                     color = B43Theme.colors.primary
-                )
+                )*/
             }
             SpacerHeight(8.dp)
             SpacerHeight(12.dp)
             TittleTextField("Роль")
             SpacerHeight(8.dp)
+            BlueTextView(state.value.role)
             SpacerHeight(12.dp)
-            TittleTextField("Полное имя")
+            TittleTextField("Фамилия")
             SpacerHeight(8.dp)
-            StandartTF("${state.name} ${state.surname} ${state.patronymic}",
-                { var listString = listOf("", "", "")
-                    viewModel.updateState(viewModel.state.copy(email = it))}, "user@mail.ru")
+            StandartTF(state.value.surname, { viewModel.stateValue = state.value.copy(surname = it)}, "Иванов")
+            SpacerHeight(12.dp)
+            TittleTextField("Имя")
+            SpacerHeight(8.dp)
+            StandartTF(state.value.name, { viewModel.stateValue = state.value.copy(name = it)}, "Иван")
+            SpacerHeight(12.dp)
+            TittleTextField("Отчество")
+            SpacerHeight(8.dp)
+            StandartTF(state.value.patronymic, { viewModel.stateValue = state.value.copy(patronymic = it)}, "Иванович")
             SpacerHeight(12.dp)
             TittleTextField("Адрес эл. почты")
             SpacerHeight(8.dp)
-            GradientTextView(state.email)
+            GradientTextView(state.value.email)
             SpacerHeight(12.dp)
             TittleTextField("Количество часов посещения")
             SpacerHeight(8.dp)
-            GradientTextView(state.hours.toString() + " ч.")
+            GradientTextView(state.value.hours.toString() + " ч.")
             SpacerHeight(12.dp)
             TittleTextField("Сумма выкупа")
-            GradientTextView(state.amountRansom.toString() + " руб.")
+            SpacerHeight(8.dp)
+            GradientTextView(state.value.amountRansom.toString() + " руб.")
+            SpacerHeight(30.dp)
+            ButtonPink("Сохранить", true) { viewModel.saveProfile() }
         }
     }
 

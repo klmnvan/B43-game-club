@@ -15,7 +15,7 @@ import com.example.b43_game_club.view.screens.splash.Splash
 fun Navigation(controller: NavHostController, visibleBBar: MutableState<Boolean>) {
     NavHost(
         navController = controller,
-        startDestination = NavigationRoutes.PROFILE) {
+        startDestination = NavigationRoutes.SPLASH) {
 
         composable(NavigationRoutes.SPLASH){
             Splash(controller)
@@ -32,6 +32,7 @@ fun Navigation(controller: NavHostController, visibleBBar: MutableState<Boolean>
             Home(controller)
         }
         composable(NavigationRoutes.PROFILE){
+            visibleBBar.value = true
             Profile(controller)
         }
         composable(NavigationRoutes.CREATEORDER){

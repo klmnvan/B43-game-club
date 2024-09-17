@@ -50,3 +50,13 @@ fun GradientTextView(text: String) {
         style = B43Theme.typography.textInTextField.copy(color = B43Theme.colors.onPrimary),
     )
 }
+
+@Composable
+fun BlueTextView(text: String) {
+    Text(text = text,
+        modifier = Modifier
+            .background(B43Theme.colors.primary, RoundedCornerShape(15.dp))
+            .padding(vertical = 14.dp, horizontal = 20.dp),
+        style = B43Theme.typography.textInTextField.copy(color = B43Theme.colors.onPrimary),
+    )
+}

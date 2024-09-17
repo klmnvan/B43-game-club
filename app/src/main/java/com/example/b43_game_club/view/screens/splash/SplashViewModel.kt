@@ -26,20 +26,6 @@ class SplashViewModel @Inject constructor(
         viewModelScope.launch {
             if (configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                 delay(1500L)
-                /*if (PrefManager.act == 0){
-                    navController.navigate(NavigationRoutes.AUTH) {
-                        popUpTo(NavigationRoutes.SPLASH) {
-                            inclusive = true
-                        }
-                    }
-                }
-                if (PrefManager.act == 1){
-                    navController.navigate(NavigationRoutes.HOME) {
-                        popUpTo(NavigationRoutes.SPLASH) {
-                            inclusive = true
-                        }
-                    }
-                }*/
                 if(service.userIsAuth()){
                     navController.navigate(NavigationRoutes.HOME) {
                         popUpTo(NavigationRoutes.SPLASH) {
@@ -47,7 +33,7 @@ class SplashViewModel @Inject constructor(
                         }
                     }
                 } else {
-                    navController.navigate(NavigationRoutes.HOME) {
+                    navController.navigate(NavigationRoutes.AUTH) {
                         popUpTo(NavigationRoutes.SPLASH) {
                             inclusive = true
                         }
@@ -56,4 +42,5 @@ class SplashViewModel @Inject constructor(
             }
         }
     }
+
 }

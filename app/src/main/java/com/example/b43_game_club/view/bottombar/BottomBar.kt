@@ -62,7 +62,7 @@ fun BottomBar(
                             indication = null
                         ) {
                             navController.navigate(screen.route) {
-                                popUpTo(navController.graph.findStartDestination().id) {
+                                popUpTo(currentRoute!!) {
                                     saveState = true
                                 }
                                 launchSingleTop = true
@@ -70,21 +70,17 @@ fun BottomBar(
                             }
                         },
                         horizontalAlignment = Alignment.CenterHorizontally) {
+                        var selectedIconTint = Color.White
                         var selectedColor = Brush.horizontalGradient(
                             listOf(B43Theme.colors.onBackground, B43Theme.colors.onBackground))
                         if(currentRoute == screen.route) {
                             selectedColor = gradientButtonPinkBlue
+                            selectedIconTint = Color.Unspecified
                         }
                         Spacer(modifier = Modifier.height(12.dp))
                         Icon(imageVector = ImageVector.vectorResource(id = screen.resourceId!!),
-                            modifier = Modifier.size(30.dp)
-                                .drawWithCache {
-                                    onDrawWithContent {
-                                        drawContent()
-                                        drawRect(selectedColor, blendMode = BlendMode.Darken)
-                                    }
-                                },
-                            contentDescription = "")
+                            modifier = Modifier.size(30.dp),
+                            contentDescription = "", tint = selectedIconTint)
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(text = screen.title!!, fontSize = 12.sp, fontWeight = FontWeight.SemiBold, style = TextStyle(
                             brush = selectedColor

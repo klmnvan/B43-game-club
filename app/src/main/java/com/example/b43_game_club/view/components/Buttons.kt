@@ -70,3 +70,29 @@ fun ButtonBluePink(text: String, onClick: () -> Unit, enabled: Boolean = true) {
         }
     }
 }
+
+@Composable
+fun ButtonPink(text: String, enabled: Boolean = true, onClick: () -> Unit) {
+    Box(modifier = Modifier.fillMaxWidth().background(gradientButtonBluePink, RoundedCornerShape(15.dp)),) {
+        Button(
+            onClick = { onClick() },
+            modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(
+                contentColor = Color(White.value),
+                containerColor = B43Theme.colors.secondary,
+                disabledContainerColor = B43Theme.colors.secondary,
+                disabledContentColor = Color(White.value)
+            ),
+            shape = RoundedCornerShape(15.dp),
+            enabled = enabled
+        ) {
+            Text(
+                text = text,
+                modifier = Modifier
+                    .padding(vertical = 8.dp),
+                style = B43Theme.typography.button,
+                color = Color.White
+            )
+        }
+    }
+}

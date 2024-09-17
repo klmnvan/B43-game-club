@@ -3,9 +3,12 @@ package com.example.b43_game_club.domain.network
 import android.util.Log
 import com.example.b43_game_club.domain.repository.PrefManager
 import com.example.b43_game_club.model.screens.Response
+import com.example.b43_game_club.model.screens.profile.ProfileState
 import com.example.b43_game_club.model.screens.supabase.GamePackage
 import com.example.b43_game_club.model.screens.supabase.GetGamePackagesResponse
 import com.example.b43_game_club.model.screens.supabase.GetTypePackageResponse
+import com.example.b43_game_club.model.screens.supabase.GetUserProfileDataResponse
+import com.example.b43_game_club.model.screens.supabase.Role
 import com.example.b43_game_club.model.screens.supabase.TypePackage
 import com.example.b43_game_club.model.screens.supabase.User
 import io.github.jan.supabase.SupabaseClient
@@ -75,6 +78,63 @@ class SupabaseServiceImpl(private val client: SupabaseClient): SupabaseService {
         } catch (e: Exception) {
             Log.d("error getGamePackages", e.message.toString())
             GetGamePackagesResponse(mutableListOf(), e.message.toString())
+        }
+    }
+
+    override suspend fun getUserProfileData(): GetUserProfileDataResponse {
+        return try {
+            var profile = ProfileState()
+            var email = ""
+            val currentUser = client.auth.currentUserOrNull()
+            if(currentUser != null) {
+                email = currentUser.email!!
+                val user = client.from("users").select{
+                    filter {
+                        eq("id", currentUser.id)
+                    }
+                }.decodeSingleOrNull<User>()
+                val roles = client.from("roles").select().decodeList<Role>()
+                if(user != null) {
+                    var role = ""
+                    if(roles.isNotEmpty()) role = roles.first { it.id ==  user.idRole}.name
+                    profile = profile.copy(
+                        id = currentUser.id,
+                        name = user.name,
+                        surname = user.surname,
+                        patronymic = user.patronymic,
+                        email = email,
+                        role = role)
+                }
+                return GetUserProfileDataResponse(profile,"")
+            }
+            GetUserProfileDataResponse(profile,"Пользователь отсутствует в supabase client")
+        } catch (e: Exception) {
+            Log.d("error getUserProfileData", e.message.toString())
+            GetUserProfileDataResponse(null, e.message.toString())
+        }
+    }
+
+    override suspend fun updateProfile(name: String, surname: String, patr: String): Response {
+        return try {
+            val currentUser = client.auth.currentUserOrNull()
+            if(currentUser != null) {
+                client.from("users").update(
+                    {
+                        set("name", name)
+                        set("surname", surname)
+                        set("patronymic", patr)
+                    }
+                ) {
+                    filter {
+                        eq("id", currentUser.id)
+                    }
+                }
+                return Response("", "")
+            }
+            Response("", "Пользователь отсутствует в supabase client")
+        } catch (e: Exception) {
+            Log.d("error updateProfile", e.message.toString())
+            Response("", e.message.toString())
         }
     }
 

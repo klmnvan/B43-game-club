@@ -39,13 +39,7 @@ fun Home(navHostController: NavHostController, viewModel: HomeViewModel = hiltVi
     }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(B43Theme.colors.background)
-            .background(
-                gradientBack
-            )
-            .verticalScroll(rememberScrollState())) {
+        modifier = Modifier.fillMaxSize().background(B43Theme.colors.background).background(gradientBack).verticalScroll(rememberScrollState())) {
         Column(modifier = Modifier.padding(horizontal = 24.dp).fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
             SpacerHeight(24.dp)
             TextTitleScreen("Прайслист")
