@@ -1,6 +1,7 @@
 package com.example.b43_game_club.domain.network
 
 import android.util.Log
+import com.example.b43_game_club.model.responses.GetAllPacks
 import com.example.b43_game_club.model.responses.Response
 import com.example.b43_game_club.model.screens.ProfileState
 import com.example.b43_game_club.model.supabase.Game
@@ -141,6 +142,18 @@ class SupabaseServiceImpl(private val client: SupabaseClient): SupabaseService {
         }
     }
 
+    override suspend fun getAllPacks(): GetAllPacks {
+        return try {
+            val response = client.from("purchased_packages").select().decodeList<PurchasedPackages>()
+            val users = client.from("users").select().decodeList<User>()
+            if(response.isNotEmpty() && users.isNotEmpty()) return GetAllPacks(response.toMutableList(), users.toMutableList(), "")
+            GetAllPacks(mutableListOf(), mutableListOf(), "")
+        } catch (e: Exception) {
+            Log.d("error getGamePackages", e.message.toString())
+            GetAllPacks(mutableListOf(), mutableListOf(), e.message.toString())
+        }
+    }
+
     override suspend fun insertPurchasedPackage(pack: PurchasedPackages): Response {
         val currentUser = client.auth.currentUserOrNull()
         return if (currentUser != null) {
@@ -183,5 +196,33 @@ class SupabaseServiceImpl(private val client: SupabaseClient): SupabaseService {
         val user = client.auth.currentUserOrNull()?.id
         return user != null
     }
+
+    suspend fun logOut(): String {
+        return try {
+            client.auth.signOut()
+            client.auth.clearSession()
+            ""
+        } catch (e: Exception) {
+            Log.d("шоколадки", e.message.toString())
+            e.message.toString()
+        }
+    }
+
+    suspend fun getRole(): String {
+        var role = ""
+        try {
+            val roles = client.from("roles").select().decodeList<Role>()
+            val user = client.from("users").select{
+                filter {
+                    eq("id", client.auth.currentUserOrNull()!!.id)
+                }
+            }.decodeSingleOrNull<User>()
+            if(user != null) role = roles.find { it.id == user.idRole }!!.name
+        } catch (e: Exception) {
+            return ""
+        }
+        return role
+    }
+
 
 }

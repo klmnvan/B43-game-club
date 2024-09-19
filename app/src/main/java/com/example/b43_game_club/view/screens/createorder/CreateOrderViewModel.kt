@@ -55,7 +55,7 @@ class CreateOrderViewModel @Inject constructor(
                     if(response.error == "") {
                         Toast.makeText(context, "Успешно", Toast.LENGTH_SHORT).show()
                         navHostController.navigate(NavigationRoutes.HOME) {
-                            popUpTo(NavigationRoutes.PROFILE) {
+                            popUpTo(NavigationRoutes.CREATEORDER) {
                                 inclusive = true
                             }
                         }

@@ -6,4 +6,5 @@ import com.example.b43_game_club.model.supabase.TypePackage
 object General {
     var typePackages: MutableList<TypePackage> = mutableListOf()
     var gamePackages: MutableList<GamePackage> = mutableListOf()
+    var role: String = ""
 }

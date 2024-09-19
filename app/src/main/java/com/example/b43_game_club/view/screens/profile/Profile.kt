@@ -21,6 +21,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.b43_game_club.domain.repository.General
 import com.example.b43_game_club.view.components.BlueTextView
 import com.example.b43_game_club.view.components.ButtonPink
 import com.example.b43_game_club.view.components.ContentCustomBox
@@ -36,7 +37,7 @@ import com.example.b43_game_club.view.ui.theme.gradientButtonPinkBlue
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun Profile(viewModel: ProfileViewModel = hiltViewModel()){
+fun Profile(navHostController: NavHostController, viewModel: ProfileViewModel = hiltViewModel()){
 
     val state = viewModel.state.collectAsState()
     viewModel.context = LocalContext.current
@@ -76,27 +77,31 @@ fun Profile(viewModel: ProfileViewModel = hiltViewModel()){
             TittleTextField("Адрес эл. почты")
             SpacerHeight(8.dp)
             GradientTextView(state.value.email)
-            SpacerHeight(20.dp)
-            FlowRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                Box(modifier = Modifier.weight(1f).background(gradientButtonPinkBlue, RoundedCornerShape(15.dp)).padding(15.dp))
-                {
-                    Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                        TittleCustomBox("Часы посещения")
-                        SpacerHeight(4.dp)
-                        ContentCustomBox(state.value.hours.toString())
+            if(General.role != "Админ"){
+                SpacerHeight(20.dp)
+                FlowRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Box(modifier = Modifier.weight(1f).background(gradientButtonPinkBlue, RoundedCornerShape(15.dp)).padding(15.dp))
+                    {
+                        Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                            TittleCustomBox("Часы посещения")
+                            SpacerHeight(4.dp)
+                            ContentCustomBox(state.value.hours.toString())
+                        }
                     }
-                }
-                Box(modifier = Modifier.weight(1f).background(gradientButtonPinkBlue, RoundedCornerShape(15.dp)).padding(15.dp))
-                {
-                    Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                        TittleCustomBox("Сумма выкупа")
-                        SpacerHeight(4.dp)
-                        ContentCustomBox(state.value.amountRansom.toInt().toString() + " Р")
+                    Box(modifier = Modifier.weight(1f).background(gradientButtonPinkBlue, RoundedCornerShape(15.dp)).padding(15.dp))
+                    {
+                        Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                            TittleCustomBox("Сумма выкупа")
+                            SpacerHeight(4.dp)
+                            ContentCustomBox(state.value.amountRansom.toInt().toString() + " Р")
+                        }
                     }
                 }
             }
             SpacerHeight(30.dp)
             ButtonPink("Сохранить", true) { viewModel.saveProfile() }
+            SpacerHeight(8.dp)
+            ButtonPink("Выйти", true) { viewModel.logOut(navHostController) }
         }
     }
 

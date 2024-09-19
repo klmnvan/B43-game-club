@@ -5,6 +5,8 @@ import android.content.Context
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavHostController
+import com.example.b43_game_club.domain.navigation.NavigationRoutes
 import com.example.b43_game_club.domain.network.SupabaseServiceImpl
 import com.example.b43_game_club.model.screens.ProfileState
 import com.example.b43_game_club.model.supabase.User
@@ -59,6 +61,18 @@ class ProfileViewModel @Inject constructor(
             }
         } else {
             Toast.makeText(context, "Сохранять нечего", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun logOut(navHostController: NavHostController) {
+        viewModelScope.launch {
+            service.logOut()
+            navHostController.popBackStack()
+            navHostController.navigate(NavigationRoutes.AUTH) {
+                popUpTo(NavigationRoutes.PROFILE) {
+                    inclusive = true
+                }
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 package com.example.b43_game_club.view.bottombar
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -37,9 +38,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.b43_game_club.domain.navigation.NavigationRoutes
+import com.example.b43_game_club.domain.repository.General
 import com.example.b43_game_club.view.ui.theme.B43Theme
 import com.example.b43_game_club.view.ui.theme.gradientButtonPinkBlue
 
+@SuppressLint("SuspiciousIndentation")
 @Composable
 fun BottomBar(
     navController: NavHostController, modifier: Modifier = Modifier
@@ -63,10 +67,8 @@ fun BottomBar(
                         ) {
                             navController.navigate(screen.route) {
                                 popUpTo(currentRoute!!) {
-                                    saveState = true
+                                    inclusive = true
                                 }
-                                launchSingleTop = true
-                                restoreState = true
                             }
                         },
                         horizontalAlignment = Alignment.CenterHorizontally) {
@@ -87,6 +89,7 @@ fun BottomBar(
                         ))
                     }
                 } else {
+                    if (General.role != "Админ")
                     Icon(imageVector = ImageVector.vectorResource(id = screens[1].resourceId!!), tint = Color.Unspecified,
                         modifier = Modifier
                             .size(45.dp)
@@ -95,13 +98,12 @@ fun BottomBar(
                                 interactionSource = remember { MutableInteractionSource() },
                                 indication = null) {
                                 navController.navigate(screens[1].route) {
-                                    popUpTo(navController.graph.findStartDestination().id) {
-                                        saveState = true
+                                    popUpTo(currentRoute!!) {
+                                        inclusive = true
                                     }
-                                    launchSingleTop = true
-                                    restoreState = true
                                 }
-                            },contentDescription = "")
+                            },
+                        contentDescription = "")
                 }
             }
         }

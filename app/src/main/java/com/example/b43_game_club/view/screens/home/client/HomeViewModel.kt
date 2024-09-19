@@ -1,4 +1,4 @@
-package com.example.b43_game_club.view.screens.home
+package com.example.b43_game_club.view.screens.home.client
 
 import android.annotation.SuppressLint
 import android.content.Context

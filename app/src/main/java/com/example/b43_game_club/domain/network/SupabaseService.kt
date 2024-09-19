@@ -1,5 +1,6 @@
 package com.example.b43_game_club.domain.network
 
+import com.example.b43_game_club.model.responses.GetAllPacks
 import com.example.b43_game_club.model.responses.Response
 import com.example.b43_game_club.model.responses.GetGamePackagesResponse
 import com.example.b43_game_club.model.responses.GetGamesResponse
@@ -21,6 +22,7 @@ interface SupabaseService {
     suspend fun getGamePackages(): GetGamePackagesResponse
     suspend fun getUserProfileData(): GetUserProfileDataResponse
     suspend fun getGames(): GetGamesResponse
+    suspend fun getAllPacks(): GetAllPacks
     suspend fun insertPurchasedPackage(pack: PurchasedPackages): Response
     suspend fun updateProfile(name: String, surname: String, patr: String): Response
 

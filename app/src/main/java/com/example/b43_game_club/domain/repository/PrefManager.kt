@@ -10,9 +10,9 @@ object PrefManager {
         spAct = context.getSharedPreferences("root", Context.MODE_PRIVATE)
     }
 
-    var act: Int
-        get() = spAct.getInt("act", 0)
-        set(value) = spAct.edit().putInt("act", value).apply()
+    /*var role: String
+        get() = spAct.getString("role", "")!!
+        set(value) = spAct.edit().putInt("act", value).apply()*/
 
 
 }

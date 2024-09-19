@@ -1,6 +1,7 @@
 package com.example.b43_game_club.view.bottombar
 
 import com.example.b43_game_club.R
+import com.example.b43_game_club.domain.navigation.NavigationRoutes
 
 sealed class DestinationsBB(
     val route: String,
@@ -9,19 +10,19 @@ sealed class DestinationsBB(
 ) {
 
     object HomeScreen : DestinationsBB(
-        route = "home",
+        route = NavigationRoutes.HOME,
         title = "Главная",
         resourceId = R.drawable.icon_fire
     )
 
     object CreateOrderScreen : DestinationsBB(
-        route = "create_order",
+        route = NavigationRoutes.CREATEORDER,
         title = null,
         resourceId = R.drawable.icon_plus
     )
 
     object ProfileScreen : DestinationsBB(
-        route = "profile",
+        route = NavigationRoutes.PROFILE,
         title = "Профиль",
         resourceId = R.drawable.icon_profile
     )
