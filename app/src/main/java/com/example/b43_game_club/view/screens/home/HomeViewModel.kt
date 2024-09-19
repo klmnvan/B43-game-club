@@ -8,7 +8,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.b43_game_club.domain.network.SupabaseServiceImpl
-import com.example.b43_game_club.model.screens.home.HomeState
+import com.example.b43_game_club.domain.repository.General
+import com.example.b43_game_club.model.screens.HomeState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -44,6 +45,8 @@ class HomeViewModel @Inject constructor(
                         state.genres = getGames.genres
                         Log.d("games", state.games.toString())
                         updateState(state.copy(groupedByFirstLetter = state.gamePackages.groupBy { it.idType }, typePackages = state.typePackages, games = state.games) )
+                        General.gamePackages = state.gamePackages
+                        General.typePackages = state.typePackages
                     } else showError(getGames.error)
                 } else showError(getPackagesResponse.error)
             } else showError(getTypesPackageResponse.error)

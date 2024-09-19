@@ -1,20 +1,19 @@
 package com.example.b43_game_club.domain.network
 
 import android.util.Log
-import com.example.b43_game_club.domain.repository.PrefManager
-import com.example.b43_game_club.model.screens.Response
-import com.example.b43_game_club.model.screens.profile.ProfileState
-import com.example.b43_game_club.model.screens.supabase.Game
-import com.example.b43_game_club.model.screens.supabase.GamePackage
-import com.example.b43_game_club.model.screens.supabase.Genre
-import com.example.b43_game_club.model.screens.supabase.GetGamePackagesResponse
-import com.example.b43_game_club.model.screens.supabase.GetGamesResponse
-import com.example.b43_game_club.model.screens.supabase.GetTypePackageResponse
-import com.example.b43_game_club.model.screens.supabase.GetUserProfileDataResponse
-import com.example.b43_game_club.model.screens.supabase.PurchasedPackages
-import com.example.b43_game_club.model.screens.supabase.Role
-import com.example.b43_game_club.model.screens.supabase.TypePackage
-import com.example.b43_game_club.model.screens.supabase.User
+import com.example.b43_game_club.model.responses.Response
+import com.example.b43_game_club.model.screens.ProfileState
+import com.example.b43_game_club.model.supabase.Game
+import com.example.b43_game_club.model.supabase.GamePackage
+import com.example.b43_game_club.model.supabase.Genre
+import com.example.b43_game_club.model.responses.GetGamePackagesResponse
+import com.example.b43_game_club.model.responses.GetGamesResponse
+import com.example.b43_game_club.model.responses.GetTypePackageResponse
+import com.example.b43_game_club.model.responses.GetUserProfileDataResponse
+import com.example.b43_game_club.model.supabase.PurchasedPackages
+import com.example.b43_game_club.model.supabase.Role
+import com.example.b43_game_club.model.supabase.TypePackage
+import com.example.b43_game_club.model.supabase.User
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.gotrue.auth
 import io.github.jan.supabase.gotrue.providers.builtin.Email
@@ -139,6 +138,20 @@ class SupabaseServiceImpl(private val client: SupabaseClient): SupabaseService {
         } catch (e: Exception) {
             Log.d("error getGamePackages", e.message.toString())
             GetGamesResponse(mutableListOf(), mutableListOf(), e.message.toString())
+        }
+    }
+
+    override suspend fun insertPurchasedPackage(pack: PurchasedPackages): Response {
+        val currentUser = client.auth.currentUserOrNull()
+        return if (currentUser != null) {
+            return try {
+                val response = client.from("purchased_packages").insert(pack.copy(idUser = currentUser.id))
+                Response(response.toString())
+            } catch (e: Exception) {
+                Response("", e.message.toString())
+            }
+        } else {
+            Response("", "Пользователь не авторизован")
         }
     }
 

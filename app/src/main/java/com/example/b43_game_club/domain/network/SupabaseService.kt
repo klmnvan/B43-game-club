@@ -1,11 +1,12 @@
 package com.example.b43_game_club.domain.network
 
-import com.example.b43_game_club.model.screens.Response
-import com.example.b43_game_club.model.screens.supabase.GetGamePackagesResponse
-import com.example.b43_game_club.model.screens.supabase.GetGamesResponse
-import com.example.b43_game_club.model.screens.supabase.GetTypePackageResponse
-import com.example.b43_game_club.model.screens.supabase.GetUserProfileDataResponse
-import com.example.b43_game_club.model.screens.supabase.User
+import com.example.b43_game_club.model.responses.Response
+import com.example.b43_game_club.model.responses.GetGamePackagesResponse
+import com.example.b43_game_club.model.responses.GetGamesResponse
+import com.example.b43_game_club.model.responses.GetTypePackageResponse
+import com.example.b43_game_club.model.responses.GetUserProfileDataResponse
+import com.example.b43_game_club.model.supabase.PurchasedPackages
+import com.example.b43_game_club.model.supabase.User
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.gotrue.Auth
 import io.github.jan.supabase.postgrest.Postgrest
@@ -20,6 +21,7 @@ interface SupabaseService {
     suspend fun getGamePackages(): GetGamePackagesResponse
     suspend fun getUserProfileData(): GetUserProfileDataResponse
     suspend fun getGames(): GetGamesResponse
+    suspend fun insertPurchasedPackage(pack: PurchasedPackages): Response
     suspend fun updateProfile(name: String, surname: String, patr: String): Response
 
     companion object {

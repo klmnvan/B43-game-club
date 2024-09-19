@@ -9,8 +9,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
 import com.example.b43_game_club.domain.navigation.NavigationRoutes
 import com.example.b43_game_club.domain.network.SupabaseServiceImpl
-import com.example.b43_game_club.domain.repository.PrefManager
-import com.example.b43_game_club.model.screens.auth.AuthState
+import com.example.b43_game_club.model.screens.AuthState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

@@ -50,10 +50,10 @@ import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
-import com.example.b43_game_club.model.screens.supabase.Game
-import com.example.b43_game_club.model.screens.supabase.GamePackage
-import com.example.b43_game_club.model.screens.supabase.Genre
-import com.example.b43_game_club.model.screens.supabase.TypePackage
+import com.example.b43_game_club.model.supabase.Game
+import com.example.b43_game_club.model.supabase.GamePackage
+import com.example.b43_game_club.model.supabase.Genre
+import com.example.b43_game_club.model.supabase.TypePackage
 import com.example.b43_game_club.view.components.SpacerHeight
 import com.example.b43_game_club.view.components.SpacerWidth
 import com.example.b43_game_club.view.ui.theme.B43Theme

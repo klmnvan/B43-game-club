@@ -3,14 +3,11 @@ package com.example.b43_game_club.view.screens.profile
 import android.annotation.SuppressLint
 import android.content.Context
 import android.widget.Toast
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.b43_game_club.domain.network.SupabaseServiceImpl
-import com.example.b43_game_club.model.screens.auth.AuthState
-import com.example.b43_game_club.model.screens.profile.ProfileState
-import com.example.b43_game_club.model.screens.supabase.User
+import com.example.b43_game_club.model.screens.ProfileState
+import com.example.b43_game_club.model.supabase.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -60,6 +57,8 @@ class ProfileViewModel @Inject constructor(
                     Toast.makeText(context, response.error, Toast.LENGTH_SHORT).show()
                 }
             }
+        } else {
+            Toast.makeText(context, "Сохранять нечего", Toast.LENGTH_SHORT).show()
         }
     }
 

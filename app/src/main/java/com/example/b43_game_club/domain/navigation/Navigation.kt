@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.b43_game_club.view.screens.profile.Profile
 import com.example.b43_game_club.view.screens.auth.Auth
+import com.example.b43_game_club.view.screens.createorder.CreateOrder
 import com.example.b43_game_club.view.screens.home.Home
 import com.example.b43_game_club.view.screens.regist.Regist
 import com.example.b43_game_club.view.screens.splash.Splash
@@ -33,10 +34,10 @@ fun Navigation(controller: NavHostController, visibleBBar: MutableState<Boolean>
         }
         composable(NavigationRoutes.PROFILE){
             visibleBBar.value = true
-            Profile(controller)
+            Profile()
         }
         composable(NavigationRoutes.CREATEORDER){
-            //CreateOrder(controller)
+            CreateOrder(controller)
         }
 
     }

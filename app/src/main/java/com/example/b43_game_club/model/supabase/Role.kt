@@ -1,9 +1,9 @@
-package com.example.b43_game_club.model.screens.supabase
+package com.example.b43_game_club.model.supabase
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class TypePackage(
+data class Role(
     var id: Int = 1,
     var name: String = "",
 )

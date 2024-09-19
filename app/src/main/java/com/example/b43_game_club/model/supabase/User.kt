@@ -1,18 +1,14 @@
-package com.example.b43_game_club.model.screens.profile
+package com.example.b43_game_club.model.supabase
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Serializer
 
 @Serializable
-data class ProfileState(
+data class User(
     var id: String = "",
     var name: String = "",
     var surname: String = "",
     var patronymic: String = "",
     @SerialName("id_role")
-    var role: String = "",
-    var email: String = "",
-    var amountRansom: Float = 0f,
-    var hours: Int = 0,
+    var idRole: Int = 1
 )

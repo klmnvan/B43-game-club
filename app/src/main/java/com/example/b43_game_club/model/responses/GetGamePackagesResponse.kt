@@ -1,5 +1,6 @@
-package com.example.b43_game_club.model.screens.supabase
+package com.example.b43_game_club.model.responses
 
+import com.example.b43_game_club.model.supabase.GamePackage
 import kotlinx.serialization.Serializable
 
 @Serializable

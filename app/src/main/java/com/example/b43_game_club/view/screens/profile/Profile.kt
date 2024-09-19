@@ -36,7 +36,7 @@ import com.example.b43_game_club.view.ui.theme.gradientButtonPinkBlue
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun Profile(navHostController: NavHostController, viewModel: ProfileViewModel = hiltViewModel()){
+fun Profile(viewModel: ProfileViewModel = hiltViewModel()){
 
     val state = viewModel.state.collectAsState()
     viewModel.context = LocalContext.current
@@ -54,15 +54,6 @@ fun Profile(navHostController: NavHostController, viewModel: ProfileViewModel = 
             Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
                 TextTitleScreen("Профиль")
                 SpacerHeight(20.dp)
-                /*Box(modifier = Modifier
-                    .background(B43Theme.colors.primaryContainer, RoundedCornerShape(15.dp))
-                    .size(100.dp))
-                SpacerHeight(4.dp)
-                Text(
-                    text = "Изменить",
-                    style = B43Theme.typography.jostRegular20,
-                    color = B43Theme.colors.primary
-                )*/
             }
             SpacerHeight(8.dp)
             SpacerHeight(12.dp)
@@ -103,15 +94,7 @@ fun Profile(navHostController: NavHostController, viewModel: ProfileViewModel = 
                         ContentCustomBox(state.value.amountRansom.toInt().toString() + " Р")
                     }
                 }
-            }/*
-            SpacerHeight(12.dp)
-            TittleTextField("Количество часов посещения")
-            SpacerHeight(8.dp)
-            GradientTextView(state.value.hours.toString() + " ч.")
-            SpacerHeight(12.dp)
-            TittleTextField("Сумма выкупа")
-            SpacerHeight(8.dp)
-            GradientTextView(state.value.amountRansom.toString() + " руб.")*/
+            }
             SpacerHeight(30.dp)
             ButtonPink("Сохранить", true) { viewModel.saveProfile() }
         }

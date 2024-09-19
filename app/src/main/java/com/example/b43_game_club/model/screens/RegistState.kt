@@ -1,4 +1,4 @@
-package com.example.b43_game_club.model.screens.regist
+package com.example.b43_game_club.model.screens
 
 data class RegistState(
     var email: String = "",
