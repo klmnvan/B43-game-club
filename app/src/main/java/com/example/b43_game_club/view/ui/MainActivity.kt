@@ -14,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.rememberNavController
 import com.example.b43_game_club.domain.navigation.Navigation
-import com.example.b43_game_club.domain.repository.PrefManager
 import com.example.b43_game_club.view.bottombar.BottomBar
 import com.example.b43_game_club.view.ui.theme.B43Theme
 import com.example.b43_game_club.view.ui.theme.ThemeMode
@@ -25,7 +24,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            PrefManager.init(LocalContext.current)
             val isBottomBarVisible = remember { mutableStateOf(false) }
             val controller = rememberNavController()
 

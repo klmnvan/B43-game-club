@@ -1,11 +1,16 @@
 # B43-game-club
 Мобильное приложение для компьютерного клуба B43  
-Макет: https://www.figma.com/design/YpfGzEld4rx8z1J8omCdLF/B43-game-club?node-id=1-20&t=8hiT26ftfovz1YC2-1
+Макет: https://www.figma.com/design/YpfGzEld4rx8z1J8omCdLF/B43-game-club?node-id=1-20&t=8hiT26ftfovz1YC2-1  
 
 ## Установка
 1. Склонировать/Скачать архивом проект
 2. Открыть проект в Android Studio
-3. Собрать проект на вашем мобильном телефоне
+3. Собрать проект на вашем мобильном телефоне  
+
+## Тестовые пользователи
+1. Логин: admin@mail.ru, пароль: admin
+2. Логин: nesklmnvan@gmail.com, пароль: 123456
+3. Логин: user@mail.ru, пароль: 123456
 
 ## Описание коммитов
 | Название | Описание                                                                            |

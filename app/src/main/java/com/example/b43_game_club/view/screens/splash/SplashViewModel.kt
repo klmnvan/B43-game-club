@@ -10,7 +10,6 @@ import androidx.navigation.NavHostController
 import com.example.b43_game_club.domain.navigation.NavigationRoutes
 import com.example.b43_game_club.domain.network.SupabaseServiceImpl
 import com.example.b43_game_club.domain.repository.General
-import com.example.b43_game_club.domain.repository.PrefManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
