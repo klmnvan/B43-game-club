@@ -39,9 +39,7 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                     }) { paddingValues ->
-                    Box(
-                        modifier = Modifier.padding(paddingValues)
-                    ) {
+                    Box(modifier = Modifier.padding(paddingValues)) {
                         Navigation(controller, isBottomBarVisible)
                     }
                 }

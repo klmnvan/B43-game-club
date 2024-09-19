@@ -1,5 +1,5 @@
-# Methodist
-Мобильное приложение для компьютерного клуба B43
+# B43-game-club
+Мобильное приложение для компьютерного клуба B43  
 Макет: https://www.figma.com/design/YpfGzEld4rx8z1J8omCdLF/B43-game-club?node-id=1-20&t=8hiT26ftfovz1YC2-1
 
 ## Установка

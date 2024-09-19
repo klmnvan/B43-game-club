@@ -4,8 +4,11 @@ import android.util.Log
 import com.example.b43_game_club.domain.repository.PrefManager
 import com.example.b43_game_club.model.screens.Response
 import com.example.b43_game_club.model.screens.profile.ProfileState
+import com.example.b43_game_club.model.screens.supabase.Game
 import com.example.b43_game_club.model.screens.supabase.GamePackage
+import com.example.b43_game_club.model.screens.supabase.Genre
 import com.example.b43_game_club.model.screens.supabase.GetGamePackagesResponse
+import com.example.b43_game_club.model.screens.supabase.GetGamesResponse
 import com.example.b43_game_club.model.screens.supabase.GetTypePackageResponse
 import com.example.b43_game_club.model.screens.supabase.GetUserProfileDataResponse
 import com.example.b43_game_club.model.screens.supabase.Role
@@ -114,6 +117,17 @@ class SupabaseServiceImpl(private val client: SupabaseClient): SupabaseService {
         }
     }
 
+    override suspend fun getGames(): GetGamesResponse {
+        return try {
+            val games = client.from("games").select().decodeList<Game>()
+            val genres = client.from("genres").select().decodeList<Genre>()
+            GetGamesResponse(games.toMutableList(), genres.toMutableList())
+        } catch (e: Exception) {
+            Log.d("error getGamePackages", e.message.toString())
+            GetGamesResponse(mutableListOf(), mutableListOf(), e.message.toString())
+        }
+    }
+
     override suspend fun updateProfile(name: String, surname: String, patr: String): Response {
         return try {
             val currentUser = client.auth.currentUserOrNull()
@@ -140,10 +154,7 @@ class SupabaseServiceImpl(private val client: SupabaseClient): SupabaseService {
 
     fun userIsAuth(): Boolean {
         val user = client.auth.currentUserOrNull()?.id
-        return if(user != null) {
-            PrefManager.act = 1
-            true
-        } else false
+        return user != null
     }
 
 }

@@ -28,25 +28,30 @@ class HomeViewModel @Inject constructor(
     @SuppressLint("StaticFieldLeak")
     lateinit var context: Context
 
-    @Suppress("NAME_SHADOWING")
     fun launch() {
         viewModelScope.launch {
-            val response = service.getTypePackages()
-            if(response.error == "") {
-                state.typePackages = response.typePackages
-                val response = service.getGamePackages()
+            val getTypesPackageResponse = service.getTypePackages()
+            if(getTypesPackageResponse.error == "") {
+                state.typePackages = getTypesPackageResponse.typePackages
                 Log.d("typePackages", state.typePackages.toString())
-                if(response.error == ""){
-                    state.gamePackages = response.gamePackages
-                    updateState(state.copy(groupedByFirstLetter = state.gamePackages.groupBy { it.idType }, typePackages = state.typePackages) )
+                val getPackagesResponse = service.getGamePackages()
+                if(getPackagesResponse.error == ""){
+                    state.gamePackages = getPackagesResponse.gamePackages
                     Log.d("gamePackages", state.gamePackages.toString())
-                } else {
-                    Toast.makeText(context, response.error, Toast.LENGTH_SHORT).show()
-                }
-            } else {
-                Toast.makeText(context, response.error, Toast.LENGTH_SHORT).show()
-            }
+                    val getGames = service.getGames()
+                    if(getGames.error == ""){
+                        state.games = getGames.games
+                        state.genres = getGames.genres
+                        Log.d("games", state.games.toString())
+                        updateState(state.copy(groupedByFirstLetter = state.gamePackages.groupBy { it.idType }, typePackages = state.typePackages, games = state.games) )
+                    } else showError(getGames.error)
+                } else showError(getPackagesResponse.error)
+            } else showError(getTypesPackageResponse.error)
         }
+    }
+
+    private fun showError(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
 }

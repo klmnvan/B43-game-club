@@ -1,20 +1,17 @@
 package com.example.b43_game_club.view.screens.profile
 
-import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -26,16 +23,18 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.b43_game_club.view.components.BlueTextView
 import com.example.b43_game_club.view.components.ButtonPink
+import com.example.b43_game_club.view.components.ContentCustomBox
 import com.example.b43_game_club.view.components.GradientTextView
 import com.example.b43_game_club.view.components.SpacerHeight
 import com.example.b43_game_club.view.components.StandartTF
 import com.example.b43_game_club.view.components.TextTitleScreen
+import com.example.b43_game_club.view.components.TittleCustomBox
 import com.example.b43_game_club.view.components.TittleTextField
-import com.example.b43_game_club.view.screens.auth.AuthViewModel
-import com.example.b43_game_club.view.screens.home.items.ItemsGamePackage
 import com.example.b43_game_club.view.ui.theme.B43Theme
 import com.example.b43_game_club.view.ui.theme.gradientBack
+import com.example.b43_game_club.view.ui.theme.gradientButtonPinkBlue
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun Profile(navHostController: NavHostController, viewModel: ProfileViewModel = hiltViewModel()){
 
@@ -86,6 +85,25 @@ fun Profile(navHostController: NavHostController, viewModel: ProfileViewModel = 
             TittleTextField("Адрес эл. почты")
             SpacerHeight(8.dp)
             GradientTextView(state.value.email)
+            SpacerHeight(20.dp)
+            FlowRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                Box(modifier = Modifier.weight(1f).background(gradientButtonPinkBlue, RoundedCornerShape(15.dp)).padding(15.dp))
+                {
+                    Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                        TittleCustomBox("Часы посещения")
+                        SpacerHeight(4.dp)
+                        ContentCustomBox(state.value.hours.toString())
+                    }
+                }
+                Box(modifier = Modifier.weight(1f).background(gradientButtonPinkBlue, RoundedCornerShape(15.dp)).padding(15.dp))
+                {
+                    Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                        TittleCustomBox("Сумма выкупа")
+                        SpacerHeight(4.dp)
+                        ContentCustomBox(state.value.amountRansom.toString())
+                    }
+                }
+            }/*
             SpacerHeight(12.dp)
             TittleTextField("Количество часов посещения")
             SpacerHeight(8.dp)
@@ -93,7 +111,7 @@ fun Profile(navHostController: NavHostController, viewModel: ProfileViewModel = 
             SpacerHeight(12.dp)
             TittleTextField("Сумма выкупа")
             SpacerHeight(8.dp)
-            GradientTextView(state.value.amountRansom.toString() + " руб.")
+            GradientTextView(state.value.amountRansom.toString() + " руб.")*/
             SpacerHeight(30.dp)
             ButtonPink("Сохранить", true) { viewModel.saveProfile() }
         }

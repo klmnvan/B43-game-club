@@ -43,7 +43,6 @@ class AuthViewModel @Inject constructor(
             viewModelScope.launch {
                 val response = service.signIn(state.email, state.password)
                 if(response.error == "") {
-                    PrefManager.act = 1
                     navHostController.navigate(NavigationRoutes.HOME) {
                         popUpTo(NavigationRoutes.AUTH) {
                             inclusive = true

@@ -5,14 +5,14 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Game(
-    var id: String = "",
+    var id: Int = 0,
     var name: String = "",
-    @SerialName("id_genre")
-    var idGenre: Int = 1,
-    @SerialName("release_date")
-    var releaseDate: String? = "",
     var developer: String = "",
+    var rating: Float = 0F,
+    @SerialName("release_year")
+    var releaseYear: String? = "",
     var image: String = "",
     var description: String = "",
-    var rating: Float = 0F,
+    @SerialName("id_genre")
+    var idGenre: Int = 1,
 )

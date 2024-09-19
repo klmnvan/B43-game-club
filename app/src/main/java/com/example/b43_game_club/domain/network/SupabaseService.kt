@@ -2,6 +2,7 @@ package com.example.b43_game_club.domain.network
 
 import com.example.b43_game_club.model.screens.Response
 import com.example.b43_game_club.model.screens.supabase.GetGamePackagesResponse
+import com.example.b43_game_club.model.screens.supabase.GetGamesResponse
 import com.example.b43_game_club.model.screens.supabase.GetTypePackageResponse
 import com.example.b43_game_club.model.screens.supabase.GetUserProfileDataResponse
 import com.example.b43_game_club.model.screens.supabase.User
@@ -18,6 +19,7 @@ interface SupabaseService {
     suspend fun getTypePackages(): GetTypePackageResponse
     suspend fun getGamePackages(): GetGamePackagesResponse
     suspend fun getUserProfileData(): GetUserProfileDataResponse
+    suspend fun getGames(): GetGamesResponse
     suspend fun updateProfile(name: String, surname: String, patr: String): Response
 
     companion object {
