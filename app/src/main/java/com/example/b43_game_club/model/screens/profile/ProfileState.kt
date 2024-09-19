@@ -12,7 +12,7 @@ data class ProfileState(
     var patronymic: String = "",
     @SerialName("id_role")
     var role: String = "",
-    var email: String = "user@mail.ru",
+    var email: String = "",
     var amountRansom: Float = 0f,
-    var hours: Float = 0f,
+    var hours: Int = 0,
 )

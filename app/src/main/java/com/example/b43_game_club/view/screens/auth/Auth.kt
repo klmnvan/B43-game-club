@@ -40,7 +40,7 @@ fun Auth(navHostController: NavHostController, viewModel: AuthViewModel = hiltVi
             SpacerHeight(30.dp)
             TittleTextField("Адрес эл. почты")
             SpacerHeight(8.dp)
-            StandartTF(state.email, { viewModel.updateState(viewModel.state.copy(email = it))}, "user@mail.ru")
+            StandartTF(state.email, { viewModel.updateState(state.copy(email = it))}, "user@mail.ru")
             SpacerHeight(20.dp)
             TittleTextField("Пароль")
             SpacerHeight(8.dp)

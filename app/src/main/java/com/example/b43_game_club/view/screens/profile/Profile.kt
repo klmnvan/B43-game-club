@@ -100,7 +100,7 @@ fun Profile(navHostController: NavHostController, viewModel: ProfileViewModel = 
                     Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
                         TittleCustomBox("Сумма выкупа")
                         SpacerHeight(4.dp)
-                        ContentCustomBox(state.value.amountRansom.toString())
+                        ContentCustomBox(state.value.amountRansom.toInt().toString() + " Р")
                     }
                 }
             }/*

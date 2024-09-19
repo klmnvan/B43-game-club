@@ -11,6 +11,7 @@ import com.example.b43_game_club.model.screens.supabase.GetGamePackagesResponse
 import com.example.b43_game_club.model.screens.supabase.GetGamesResponse
 import com.example.b43_game_club.model.screens.supabase.GetTypePackageResponse
 import com.example.b43_game_club.model.screens.supabase.GetUserProfileDataResponse
+import com.example.b43_game_club.model.screens.supabase.PurchasedPackages
 import com.example.b43_game_club.model.screens.supabase.Role
 import com.example.b43_game_club.model.screens.supabase.TypePackage
 import com.example.b43_game_club.model.screens.supabase.User
@@ -97,16 +98,29 @@ class SupabaseServiceImpl(private val client: SupabaseClient): SupabaseService {
                     }
                 }.decodeSingleOrNull<User>()
                 val roles = client.from("roles").select().decodeList<Role>()
+                var hour = 0
+                var cost = 0F
                 if(user != null) {
                     var role = ""
                     if(roles.isNotEmpty()) role = roles.first { it.id ==  user.idRole}.name
+                    val listPurchased = client.from("purchased_packages").select {
+                        filter {
+                            eq("id_user", user.id)
+                        }
+                    }.decodeList<PurchasedPackages>()
+                    if(listPurchased.isNotEmpty()) {
+                        hour = listPurchased.sumOf { it.hours }
+                        cost = listPurchased.sumOf { it.cost.toInt() }.toFloat()
+                    }
                     profile = profile.copy(
                         id = currentUser.id,
                         name = user.name,
                         surname = user.surname,
                         patronymic = user.patronymic,
                         email = email,
-                        role = role)
+                        role = role,
+                        hours = hour,
+                        amountRansom = cost)
                 }
                 return GetUserProfileDataResponse(profile,"")
             }
